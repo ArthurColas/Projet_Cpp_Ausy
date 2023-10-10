@@ -6,6 +6,7 @@
 
 # Ignore CodeBlocks project files
 *.cbp
+*.depend
 
 # Ignore log files
 *.log

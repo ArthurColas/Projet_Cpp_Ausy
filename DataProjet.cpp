@@ -1,5 +1,6 @@
 #include <iostream>
 #include "DataProjet.h"
+#include "json.h"
 
 DataProjet::DataProjet(enum Direction direction, float abs, float ord)
 {
@@ -24,12 +25,7 @@ DataProjet::~DataProjet()
 
 }
 
-string DataProjet::GetJson()
-{
-    return "";
-}
-
-void DataProjet::Afficher()
+string DataProjet::GetDirection()
 {
     string direction = "";
 
@@ -45,6 +41,29 @@ void DataProjet::Afficher()
         break;
     }
 
-    cout << "Direction : " << direction << ", Abscisse : " << _abscisse << ", Ordonnee : "<< _ordonnee << endl;
+    return direction;
+}
+
+string DataProjet::GetJson()
+{
+    Json::Value m_data;
+    m_data["direction"] = GetDirection();
+    m_data["abscisse"] = _abscisse;
+    m_data["ordonnee"] = _ordonnee;
+
+    Json::StreamWriterBuilder writer;
+    string jsonString = Json::writeString(writer, m_data);
+
+    cout << "json genere"  << endl;
+    cout << jsonString << endl;
+
+    return jsonString;
+}
+
+void DataProjet::Afficher()
+{
+
+
+    cout << "Direction : " << GetDirection() << ", Abscisse : " << _abscisse << ", Ordonnee : "<< _ordonnee << endl;
 }
 

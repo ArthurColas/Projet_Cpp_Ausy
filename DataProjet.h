@@ -29,7 +29,8 @@ class DataProjet
 
     float GetAbscisse(){return _abscisse;}
     float GetOrdonne(){return _ordonnee;}
-    enum Direction GetDirection(){return _direction;}
+    //enum Direction GetDirection(){return _direction;}
+    string GetDirection();
 
     void SetAbscisse(float val){_abscisse = val;}
     void SetOrdonnee(float val){_ordonnee = val;}
