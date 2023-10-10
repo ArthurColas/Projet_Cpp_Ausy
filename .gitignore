@@ -4,12 +4,17 @@
 *.so
 *.dll
 
+# Ignore CodeBlocks project files
+*.cbp
+
 # Ignore log files
 *.log
 
 # Ignore build directories
 /build/
 /dist/
+/bin/
+/obj/
 
 # Ignore configuration files with sensitive data (e.g., API keys)
 config.ini
