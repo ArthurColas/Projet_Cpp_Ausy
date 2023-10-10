@@ -35,13 +35,13 @@ void DataProjet::Afficher()
 
     switch(_direction)
     {
-    case Direction.BAS : direction = "bas";
+    case BAS : direction = "bas";
         break;
-    case Direction.HAUT : direction = "haut";
+    case HAUT : direction = "haut";
         break;
-    case Direction.GAUCHE : direction = "gauche";
+    case GAUCHE : direction = "gauche";
         break;
-    case Direction.DROITE : direction = "droite";
+    case DROITE : direction = "droite";
         break;
     }
 
