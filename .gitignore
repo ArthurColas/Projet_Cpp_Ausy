@@ -1,0 +1,17 @@
+# Ignore compiled binary files
+*.exe
+*.o
+*.so
+*.dll
+
+# Ignore log files
+*.log
+
+# Ignore build directories
+/build/
+/dist/
+
+# Ignore configuration files with sensitive data (e.g., API keys)
+config.ini
+
+
