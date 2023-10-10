@@ -1,10 +1,12 @@
-#ifndef MAIN_CPP_INCLUDED
-#define MAIN_CPP_INCLUDED
+#include <iostream>
+#include "DataProjet.h"
 
+using namespace std;
 
+int main()
+{
+    enum Direction direction = HAUT;
+    DataProjet data{direction, 1.0f, -1.0f};
 
-#endif // MAIN_CPP_INCLUDED
-
-int main(){
-
+    data1.Afficher();
 }
