@@ -4,3 +4,7 @@
 
 
 #endif // MAIN_CPP_INCLUDED
+
+int main(){
+
+}
