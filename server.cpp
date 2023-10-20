@@ -6,6 +6,7 @@
 #include <pthread.h> // multi threading
 #include <errno.h>
 #include <signal.h>
+#include <cstring>
 
 // Included for count execution time
 #include <time.h>
@@ -15,7 +16,7 @@
 #define ADDRESS "0.0.0.0"
 
 // port number
-#define PORT 8888
+#define PORT 8085
 
 // maximum concurrent connections
 #define CONCURRENT_CONNECTION 10

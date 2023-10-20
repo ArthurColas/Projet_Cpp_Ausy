@@ -3,9 +3,10 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <string>
+#include <cstring>
 
 #define ADDRESS "127.0.0.1"
-#define PORT 8888
+#define PORT 8085
 #define BUFFER_SIZE 1024
 
 int main(int argc, char const *argv[]) {
