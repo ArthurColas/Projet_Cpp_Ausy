@@ -9,15 +9,37 @@ DataProjet::DataProjet(enum Direction direction, float abs, float ord)
     _ordonnee = ord;
 }
 
-DataProjet::DataProjet(string)
+DataProjet::DataProjet(string rawJson)
 {
     // générer classe a partir du json
     //utiliser methode privée ParseJson
-}
+    Json::Value root;
+    Json::Reader reader;
+    reader.parse(rawJson, root);
 
-void DataProjet::ParseJson(string)
-{
+    _abscisse = root["abscisse"].asFloat();
+    _ordonnee = root["ordonnee"].asFloat();
+    string direction = root["direction"].asString();
 
+    if(direction == "haut")
+    {
+        _direction = HAUT;
+    }
+
+    if(direction == "bas")
+    {
+        _direction = BAS;
+    }
+
+    if(direction == "droite")
+    {
+        _direction = DROITE;
+    }
+
+    if(direction == "gauche")
+    {
+        _direction = GAUCHE;
+    }
 }
 
 DataProjet::~DataProjet()

@@ -20,7 +20,6 @@ class DataProjet
      enum Direction _direction;
      float _abscisse;
      float _ordonnee;
-     void ParseJson(string);
 
  public :
     DataProjet(enum Direction, float, float);
