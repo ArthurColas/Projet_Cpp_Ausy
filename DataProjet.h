@@ -3,6 +3,8 @@
 
 #include<iostream>
 
+#include <jsoncpp/json/json.h>
+
 using namespace std;
 
 enum Direction

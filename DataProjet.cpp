@@ -1,6 +1,7 @@
 #include <iostream>
 #include "DataProjet.h"
-#include "json.h"
+
+// #include "json.h"
 
 DataProjet::DataProjet(enum Direction direction, float abs, float ord)
 {
@@ -11,8 +12,8 @@ DataProjet::DataProjet(enum Direction direction, float abs, float ord)
 
 DataProjet::DataProjet(string rawJson)
 {
-    // générer classe a partir du json
-    //utiliser methode privée ParseJson
+    // generer classe a partir du json
+    //utiliser methode privee ParseJson
     Json::Value root;
     Json::Reader reader;
     reader.parse(rawJson, root);
