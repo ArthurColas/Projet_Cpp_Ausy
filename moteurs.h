@@ -4,7 +4,8 @@
 class Moteurs {
 public:
     // Constructors
-    Moteurs(int pinAvantG=17, int pinArriereG=12, int pinAvantD = 27, int pinArriereD = 18, int pinEEP = 22);  // Parameterized constructor
+    Moteurs();
+    Moteurs(int pinAvantD=27, int pinArriereD=18, int pinArriereG = 12, int pinAvantG = 17, int pinEEP = 22);  // Parameterized constructor
     //Moteur(const Moteur& other);      // Copy constructor
 
     // Destructor

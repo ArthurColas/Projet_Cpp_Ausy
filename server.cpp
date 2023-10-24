@@ -55,8 +55,9 @@ void TCPServer::StartListening() {
         std::cout << "Received from client: " << buffer << std::endl;
 
         // You can process the received data here and send a response if needed.
-
-	setDirection( JsonDataManager(buffer).GetDirection() );
+	JsonDataManager data_received = JsonDataManager(buffer);
+	setDirection( data_received.GetDirection() );
+	setVitesse( data_received.GetVitesse() );
 
         close(clientSocket);
     }

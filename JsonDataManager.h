@@ -7,35 +7,32 @@
 
 using namespace std;
 
-enum Direction
+/*enum Direction  // obsolete
 {
     HAUT,
     BAS,
     GAUCHE,
-    DROITE
-};
+    DROITE 
+};*/
 
 class JsonDataManager
 {
 
  private :
-     enum Direction _direction;
-     float _abscisse;
-     float _ordonnee;
+     string _direction;
+     int _vitesse;
 
  public :
-    JsonDataManager(enum Direction, float, float);
+    JsonDataManager(string _direction, int vitesse);
     JsonDataManager(string);
     ~JsonDataManager();
 
-    float GetAbscisse(){return _abscisse;}
-    float GetOrdonne(){return _ordonnee;}
+    int GetVitesse();
     //enum Direction GetDirection(){return _direction;}
     string GetDirection();
 
-    void SetAbscisse(float val){_abscisse = val;}
-    void SetOrdonnee(float val){_ordonnee = val;}
-    void SetDirection(enum Direction val){_direction = val;}
+    void SetVitesse(int val){_vitesse = val;}
+    void SetDirection(string val){_direction = val;}
 
     void ParseJson(string);
 

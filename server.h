@@ -19,6 +19,8 @@ public:
 
     void setDirection(string dir) {direction = dir;}
     string getDirection() {return direction;}
+    void setVitesse(int vit) {vitesse = vit;}
+    int getVitesse() {return vitesse;}
 
     void StartListening();
     void Close();
@@ -27,6 +29,7 @@ private:
     int serverSocket;
     int port;
     string direction;
+    int vitesse;
 };
 
 #endif

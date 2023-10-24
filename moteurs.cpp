@@ -5,6 +5,15 @@
 
 #include "moteurs.h"
 
+Moteurs::Moteurs(){
+    pinAvantD=27;
+    pinArriereD=18;
+    pinArriereG=12;
+    pinAvantG=17;
+    pinEEP=22;
+    init_gpio_moteurs();
+}
+
 Moteurs::Moteurs(int avD , int arD, int arG, int avG, int eep) {
     pinAvantD=avD;
     pinArriereD=arD;
@@ -12,10 +21,10 @@ Moteurs::Moteurs(int avD , int arD, int arG, int avG, int eep) {
     pinAvantG=avG;
     pinEEP=eep;
     init_gpio_moteurs();
+
 }
 
-Moteurs::Moteurs(){
-    init_gpio_moteurs();
+Moteurs::~Moteurs() {
 }
 
 void Moteurs::init_gpio_moteurs() {

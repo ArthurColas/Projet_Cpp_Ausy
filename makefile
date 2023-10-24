@@ -1,6 +1,6 @@
 CC = g++
 CFLAGS = -Wall -std=c++14 -Werror -Wextra
-LIB = -pthread -ljsoncpp
+LIB = -pthread -ljsoncpp -lpigpio
 OS = linux
 
 SRC = $(wildcard *.cpp)
