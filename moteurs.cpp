@@ -37,6 +37,7 @@ void Moteurs::init_gpio_moteurs() {
 
     // Activer la carte DRV8833
     gpioWrite(pinEEP, 1);
+    SetVitesse(0);
 }
 
 void Moteurs::stop_motors() {
@@ -46,36 +47,36 @@ void Moteurs::stop_motors() {
     gpioPWM(pinAvantG, 0);
 }
 
-void Moteurs::marche_avant(int speed) {
+void Moteurs::marche_avant() {
     stop_motors();
-    gpioPWM(pinAvantD, speed);
-    gpioPWM(pinAvantG, speed);
+    gpioPWM(pinAvantD, GetVitesse());
+    gpioPWM(pinAvantG, GetVitesse());
 }
 
-void Moteurs::marche_arriere(int speed) {
+void Moteurs::marche_arriere() {
     stop_motors();
-    gpioPWM(pinAvantD, speed);
-    gpioPWM(pinArriereG, speed);
+    gpioPWM(pinAvantD, GetVitesse());
+    gpioPWM(pinArriereG, GetVitesse());
 }
 
-void Moteurs::aller_droite(int speed) {
+void Moteurs::aller_droite() {
     stop_motors();
-    gpioPWM(pinAvantD, speed);
-    gpioPWM(pinAvantG, speed);
+    gpioPWM(pinAvantD, GetVitesse());
+    gpioPWM(pinAvantG, GetVitesse());
 }
 
-void Moteurs::aller_gauche(int speed) {
+void Moteurs::aller_gauche() {
     stop_motors();
-    gpioPWM(pinAvantD, speed);
-    gpioPWM(pinArriereG, speed);
+    gpioPWM(pinAvantD, GetVitesse());
+    gpioPWM(pinArriereG, GetVitesse());
 }
 
-void Moteurs::rotation(int speed) {
+void Moteurs::rotation() {
     stop_motors();
-    gpioPWM(pinAvantD, speed);
-    gpioPWM(pinArriereG, speed);
+    gpioPWM(pinAvantD, GetVitesse());
+    gpioPWM(pinArriereG, GetVitesse());
     sleep(1);
-    gpioPWM(pinArriereD, speed);
-    gpioPWM(pinAvantG, speed);
+    gpioPWM(pinArriereD, GetVitesse());
+    gpioPWM(pinAvantG, GetVitesse());
 }
 

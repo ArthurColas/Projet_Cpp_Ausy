@@ -14,11 +14,14 @@ public:
     // Member functions
     void init_gpio_moteurs();
     void stop_motors();
-    void marche_avant(int speed);
-    void marche_arriere(int speed);
-    void aller_gauche(int speed);
-    void aller_droite(int speed);
-    void rotation(int speed);
+    void marche_avant();
+    void marche_arriere();
+    void aller_gauche();
+    void aller_droite();
+    void rotation();
+
+    int GetVitesse() { return vitesse;}
+    void SetVitesse(int vit) {vitesse=vit;}
 
 private:
     // Private data members (class attributes)
@@ -27,7 +30,7 @@ private:
     int pinAvantD;
     int pinArriereD;
     int pinEEP;
-
+    int vitesse;
     const int MAX_RANGE_PWM = 255; // Plage maximale pour la PWM
 
 };

@@ -15,39 +15,39 @@ int main() {
 
 //  Moteurs moteurs=Moteurs();   // raise ambiguïous overload of constructor
     Moteurs moteurs=Moteurs(27,18,12,17,22);
-    int vitesse;
 
     while (true) {
-	vitesse = server.getVitesse();
+	moteurs.SetVitesse( server.getVitesse() );
 	switch(server.getDirection()[0])
 		{
 		case 'Z' :
-		    std::cout << "Marche avant à vitesse " << std::setprecision(1) << (vitesse*100/MAX_RANGE_PWM) <<"%" << std::endl;
-		    moteurs.marche_avant(vitesse);
+		    std::cout << "Marche avant à vitesse " << std::setprecision(1) << (moteurs.GetVitesse()*100/MAX_RANGE_PWM) <<"%" << std::endl;
+		    moteurs.marche_avant();
                     sleep(1);
                     moteurs.stop_motors();
                     break;
                 case 'D' :
 		    std::cout << "Aller à droite à vitesse maximale" << std::endl;
-                    moteurs.aller_droite(vitesse);
+                    moteurs.aller_droite();
                     sleep(1);
                     moteurs.stop_motors();
                     break;
                 case 'S' :
-                    std::cout << "Marche arriere à vitesse " << std::setprecision(1) << (vitesse*100/MAX_RANGE_PWM) <<"%" << std::endl;
-		    moteurs.marche_arriere(vitesse);
+                    std::cout << "Marche arriere à vitesse " << std::setprecision(1) << (moteurs.GetVitesse()*100/MAX_RANGE_PWM) <<"%" << std::endl;
+		    moteurs.marche_arriere();
                     sleep(1);
                     moteurs.stop_motors();
                     break;
                 case 'Q' :
                     std::cout << "Aller à gauche à vitesse maximale" << std::endl;
-                    moteurs.aller_gauche(vitesse);
+                    moteurs.aller_gauche();
                     sleep(1);
                     moteurs.stop_motors();
                     break;
                 case ' ' :
                     std::cout << "STOP !" << std::endl;
                     moteurs.stop_motors();
+		    moteurs.SetVitesse(0);
                     break;
 		}
 	std::this_thread::sleep_for(std::chrono::seconds(1));
