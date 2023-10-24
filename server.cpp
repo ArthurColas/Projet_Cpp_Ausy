@@ -155,7 +155,8 @@ void *connection_handler(void *sock_fd) {
 	
 	// read response continue
 	while ((read_byte = recv(conn_id, buffer, BUFFER_SIZE, 0)) > 0) {
-		std::cout << "[RECEIVED] " << buffer << "\n";
+		//std::cout << "[RECEIVED] " << buffer << "\n";
+		
 		// clear buffer data
 		memset(buffer, 0, BUFFER_SIZE);
 		
