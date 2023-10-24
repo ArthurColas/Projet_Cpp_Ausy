@@ -56,6 +56,8 @@ void TCPServer::StartListening() {
 
         // You can process the received data here and send a response if needed.
 
+	setDirection( JsonDataManager(buffer).GetDirection() );
+
         close(clientSocket);
     }
 }
