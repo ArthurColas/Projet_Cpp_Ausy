@@ -55,13 +55,13 @@ void Moteurs::marche_avant() {
 
 void Moteurs::marche_arriere() {
     stop_motors();
-    gpioPWM(pinAvantD, GetVitesse());
+    gpioPWM(pinArriereD, GetVitesse());
     gpioPWM(pinArriereG, GetVitesse());
 }
 
 void Moteurs::aller_droite() {
     stop_motors();
-    gpioPWM(pinAvantD, GetVitesse());
+    gpioPWM(pinArriereD, GetVitesse());
     gpioPWM(pinAvantG, GetVitesse());
 }
 

@@ -1,4 +1,5 @@
 #include "server.h"
+#include <thread>
 
 TCPServer::TCPServer(int port) {
     this->port = port;
@@ -36,9 +37,10 @@ void TCPServer::StartListening() {
     struct sockaddr_in clientAddress;
     socklen_t clientAddressLength = sizeof(clientAddress);
     int clientSocket;
+    clientSocket = accept(serverSocket, (struct sockaddr*)&clientAddress, &clientAddressLength);
 
     while (true) {
-        clientSocket = accept(serverSocket, (struct sockaddr*)&clientAddress, &clientAddressLength);
+        
         if (clientSocket < 0) {
             perror("Accepting client connection failed");
             exit(EXIT_FAILURE);
@@ -55,12 +57,12 @@ void TCPServer::StartListening() {
         std::cout << "Received from client: " << buffer << std::endl;
 
         // You can process the received data here and send a response if needed.
-	JsonDataManager data_received = JsonDataManager(buffer);
-	setDirection( data_received.GetDirection() );
-	setVitesse( data_received.GetVitesse() );
-
-        close(clientSocket);
+        JsonDataManager data_received = JsonDataManager(buffer);
+        setDirection( data_received.GetDirection() );
+        setVitesse( data_received.GetVitesse() );
+        std::this_thread::sleep_for(std::chrono::milliseconds(500));
     }
+    close(clientSocket);
 }
 
 void TCPServer::Close() {

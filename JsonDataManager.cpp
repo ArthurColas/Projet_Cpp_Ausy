@@ -61,13 +61,11 @@ void JsonDataManager::ParseJson(string rawJson)
     reader.parse(rawJson, root);
 
     _vitesse = root["vitesse"].asInt();
-    string _direction = root["direction"].asString();
+    _direction = root["direction"].asString();
 }
 
 void JsonDataManager::Afficher()
 {
-
-
     cout << "Direction : " << GetDirection() << ", Vitesse : " << GetVitesse() << endl;
 }
 

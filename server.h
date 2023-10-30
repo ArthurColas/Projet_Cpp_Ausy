@@ -10,7 +10,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 
-#include "JsonDataManager.cpp"
+#include "JsonDataManager.h"
 
 class TCPServer {
 public:
