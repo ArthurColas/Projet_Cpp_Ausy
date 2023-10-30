@@ -1,7 +1,7 @@
 #include "client.h"
-#include "client.cpp"
-
-#include "JsonDataManager.cpp"
+//#include "client.cpp"
+#include "JsonDataManager.h"
+//#include "JsonDataManager.cpp"
 
 #define MAX_RANGE_PWM 255
 
@@ -15,7 +15,7 @@ int main() {
 
     std::string message, saisie, vitesse;
 
-    std::cout << " Z avance, Q gauche, S recule, D droite, SPACE arret " << std::endl;
+    std::cout << " Z avance, Q gauche, S recule, D droite, X arret " << std::endl;
     std::cin >> saisie;
     std::cout << "Choisir la vitesse entre 1 et " << MAX_RANGE_PWM << std::endl;
     std::cin >> vitesse;
