@@ -25,25 +25,25 @@ int main() {
             {
             case 'z' :
                 std::cout << "Marche avant à vitesse " << (moteurs.GetVitesse()*100/MAX_RANGE_PWM) <<"%" << std::endl;
-                moteurs.marche_avant();
+                //moteurs.marche_avant();
                 sleep(1);
                 moteurs.stop_motors();
                 break;
             case 'd' :
                 std::cout << "Aller à droite à vitesse maximale" << std::endl;
-                moteurs.aller_droite();
+                //moteurs.aller_droite();
                 sleep(1);
                 moteurs.stop_motors();
                 break;
             case 's' :
                 std::cout << "Marche arriere à vitesse " << (moteurs.GetVitesse()*100/MAX_RANGE_PWM) <<"%" << std::endl;
-                moteurs.marche_arriere();
+                //moteurs.marche_arriere();
                 sleep(1);
                 moteurs.stop_motors();
                 break;
             case 'q' :
                 std::cout << "Aller à gauche à vitesse maximale" << std::endl;
-                moteurs.aller_gauche();
+                //moteurs.aller_gauche();
                 sleep(1);
                 moteurs.stop_motors();
                 break;
