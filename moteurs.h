@@ -1,6 +1,11 @@
 #ifndef MOTEUR_H
 #define MOTEUR_H
 
+#include <mutex>
+#include <thread>
+#include <chrono>
+#include "server.h"
+
 class Moteurs {
 public:
     // Constructors
@@ -22,6 +27,8 @@ public:
 
     int GetVitesse() { return vitesse;}
     void SetVitesse(int vit) {vitesse=vit;}
+
+    void controle_moteurs(TCPServer &server, std::mutex &server_mtx); 
 
 private:
     // Private data members (class attributes)

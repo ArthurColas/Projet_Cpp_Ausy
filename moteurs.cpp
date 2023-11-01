@@ -20,7 +20,6 @@ Moteurs::Moteurs(int avD , int arD, int arG, int avG, int eep) {
     pinArriereG=arG;
     pinAvantG=avG;
     pinEEP=eep;
-    std::cout << "Moteurs initialises" << std::endl;
     init_gpio_moteurs();
 
 }
@@ -81,3 +80,52 @@ void Moteurs::rotation() {
     gpioPWM(pinAvantG, GetVitesse());
 }
 
+// fonction appelée dans le thread moteur du programme principal
+void Moteurs::controle_moteurs(TCPServer &server, std::mutex &server_mtx) {
+
+    char direction;
+    while (true) {
+        // Scope du mutex
+        {
+            std::unique_lock<std::mutex> lock_server(server_mtx);
+            std::cout << "Debug get vitesse : " << server.getVitesse() << std::endl;
+            SetVitesse( server.getVitesse() );
+            direction = server.getDirection()[0];
+            std::cout << "Debug get direction : " << (server.getDirection())[0] << std::endl;
+        }
+
+        switch(direction)
+            {
+            case 'Z' :
+                std::cout << "Marche avant " << std::endl;
+                //moteurs.marche_avant();
+                sleep(1);
+                stop_motors();
+                break;
+            case 'D' :
+                std::cout << "Aller à droite " << std::endl;
+                //moteurs.aller_droite();
+                sleep(1);
+                stop_motors();
+                break;
+            case 'S' :
+                std::cout << "Marche arriere " << std::endl;
+                //moteurs.marche_arriere();
+                sleep(1);
+                stop_motors();
+                break;
+            case 'Q' :
+                std::cout << "Aller à gauche " << std::endl;
+                //moteurs.aller_gauche();
+                sleep(1);
+                stop_motors();
+                break;
+            case 'X' :
+                std::cout << "STOP !" << std::endl;
+                stop_motors();
+                SetVitesse(0);
+                break;
+            }
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+        }
+}

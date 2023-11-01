@@ -10,6 +10,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h> // Include the header for inet_pton
+#include <mutex>
 
 #include "JsonDataManager.h"
 
@@ -23,7 +24,7 @@ public:
     void setVitesse(int vit) {vitesse = vit;}
     int getVitesse() {return vitesse;}
 
-    void StartListening();
+    void StartListening( std::mutex &server_mtx);
     void Close();
 
 private:

@@ -5,9 +5,9 @@
 capteur_sonic::capteur_sonic() {
 }
 
-double MeasureDist(int capteurNum)
+double capteur_sonic::MeasureDist(int capteurNum)
 {
-	const int TRIG_PIN = 26;
+const int TRIG_PIN = 26;
 
 const int ECHO_PIN_1 = 20;
 const int ECHO_PIN_2 = 16;

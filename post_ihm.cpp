@@ -61,8 +61,8 @@ void post_ihm::send(double temperature, double pression, int batterie, double ga
         if(res != CURLE_OK) {
             fprintf(stderr, "curl_easy_perform() a échoué : %s\n", curl_easy_strerror(res));
         } else {
-            std::cout << "Requête POST terminée avec succès.\n";
-            std::cout << "Réponse : " << readBuffer << std::endl;
+            //std::cout << "Requête POST terminée avec succès.\n";
+            //std::cout << "Réponse : " << readBuffer << std::endl;
         }
 
         // Nettoyage des en-têtes

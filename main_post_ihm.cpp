@@ -4,9 +4,8 @@
 #include <chrono>
 
 int main() {
-
+    capteur_sonic capteurs=capteur_sonic();
     while(true) {
-	capteur_sonic capteurs=capteur_sonic();
 	double gauche=capteurs.MeasureDist(16);
         double droite=capteurs.MeasureDist(21);
         double avant=capteurs.MeasureDist(20);
@@ -20,6 +19,19 @@ int main() {
 
 	std::this_thread::sleep_for(std::chrono::seconds(2));
    } return 0;
+}
+
+void client_post_ihm() {
+        double gauche=capteurs.MeasureDist(16);
+        double droite=capteurs.MeasureDist(21);
+        double avant=capteurs.MeasureDist(20);
+
+        double temperature=10;
+        double pression=20;
+        int batterie=30;
+
+        post_ihm client=post_ihm();
+        client.send(temperature, pression, batterie, gauche, droite, avant);
 }
 
 /*

@@ -34,7 +34,7 @@ TCPServer::~TCPServer() {
     Close();
 }
 
-void TCPServer::StartListening() {
+void TCPServer::StartListening(std::mutex &server_mtx) {
 
     if (listen(serverSocket, 5) < 0) {
         perror("Listening failed");
@@ -46,9 +46,11 @@ void TCPServer::StartListening() {
     struct sockaddr_in clientAddress;
     socklen_t clientAddressLength = sizeof(clientAddress);
     int clientSocket;
-    clientSocket = accept(serverSocket, (struct sockaddr*)&clientAddress, &clientAddressLength);
 
     while (true) {
+
+        clientSocket = accept(serverSocket, (struct sockaddr*)&clientAddress, &clientAddressLength);
+
         if (clientSocket < 0) {
             perror("Accepting client connection failed");
             exit(EXIT_FAILURE);
@@ -66,13 +68,20 @@ void TCPServer::StartListening() {
 
         // You can process the received data here and send a response if needed.
         JsonDataManager data_received = JsonDataManager(buffer);
-	std::cout << "serverdebug direction : " << data_received.GetDirection() << std::endl;
+        std::cout << "serverdebug direction : " << data_received.GetDirection() << std::endl;
         std::cout << "server debug vitesse : " << data_received.GetVitesse() << std::endl;
+        // Scope du mutex
+        {
+            std::unique_lock<std::mutex> lock_server(server_mtx);
+            setDirection( data_received.GetDirection() );
+            setVitesse( data_received.GetVitesse() );
+        }
         setDirection( data_received.GetDirection() );
         setVitesse( data_received.GetVitesse() );
         std::this_thread::sleep_for(std::chrono::milliseconds(500));
-	}
-	close(clientSocket);
+
+        close(clientSocket);
+        }
 }
 
 void TCPServer::Close() {

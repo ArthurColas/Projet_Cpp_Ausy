@@ -3,62 +3,85 @@
 #include "server.h"
 #include "moteurs.h"
 #include "JsonDataManager.h"
+#include "post_ihm.h"
+#include "capteur_sonic.h"
 
 #include <thread>
 #include <chrono>
 
 #define MAX_RANGE_PWM 255
 
-int main() {
-    int port = 8085;  // Change this to your desired port number
-    TCPServer server(port);
-    std::thread server_thread( [&server]() {server.StartListening();} );
-    
-//  Moteurs moteurs=Moteurs();
-    Moteurs moteurs=Moteurs(27,18,12,17,22);
+std::mutex server_mtx;
 
-    while (true) {
-        std::cout << "Debug get vitesse : " << server.getVitesse() << std::endl;
-        moteurs.SetVitesse( server.getVitesse() );
-        std::cout << "Debug get direction : " << (server.getDirection())[0] << std::endl;
-        switch(char(server.getDirection()[0]))
-            {
-            case 'Z' :
-                std::cout << "Marche avant à vitesse " << (moteurs.GetVitesse()*100/MAX_RANGE_PWM) <<"%" << std::endl;
-                //moteurs.marche_avant();
-                sleep(1);
-                moteurs.stop_motors();
-                break;
-            case 'D' :
-                std::cout << "Aller à droite à vitesse maximale" << std::endl;
-                //moteurs.aller_droite();
-                sleep(1);
-                moteurs.stop_motors();
-                break;
-            case 'S' :
-                std::cout << "Marche arriere à vitesse " << (moteurs.GetVitesse()*100/MAX_RANGE_PWM) <<"%" << std::endl;
-                //moteurs.marche_arriere();
-                sleep(1);
-                moteurs.stop_motors();
-                break;
-            case 'Q' :
-                std::cout << "Aller à gauche à vitesse maximale" << std::endl;
-                //moteurs.aller_gauche();
-                sleep(1);
-                moteurs.stop_motors();
-                break;
-            case 'X' :
-                std::cout << "STOP !" << std::endl;
-                moteurs.stop_motors();
-                moteurs.SetVitesse(0);
-                break;
-            }
-        std::this_thread::sleep_for(std::chrono::seconds(2));
-        }
+int main() {
+
+// INITIALISATION DES VARIABLES ET OBJETS
+   int port = 8085;  
+   TCPServer server(port);
+
+   Moteurs moteurs=Moteurs(27,18,12,17,22);
+
+   double gauche, droite, avant, temperature, pression;
+   int batterie;
+   post_ihm client=post_ihm();
+   capteur_sonic capteurs = capteur_sonic();
+
+   std::mutex server_mtx;
+
+// THREADS
+
+   std::thread server_thread( [&server, &server_mtx]() {
+        server.StartListening(server_mtx);
+   } );
+
+    std::thread client_thread( [&client,&temperature, &pression, &batterie, &gauche, &droite, &avant]()
+        {
+           while(true) {
+                client.send(temperature, pression, batterie, gauche, droite, avant);
+                std::this_thread::sleep_for(std::chrono::seconds(2));
+         }
+   } );
+
+   std::thread capteurs_sonic_thread( [&capteurs, &gauche, &droite, &avant]()
+        {
+           while(true) {
+                gauche=capteurs.MeasureDist(16);
+                droite=capteurs.MeasureDist(21);
+                avant=capteurs.MeasureDist(20);
+                std::this_thread::sleep_for(std::chrono::seconds(2));
+         }
+   } );
+
+/*   std::thread temperature_thread( [&capteur_temp, &temperature]()
+        {
+           while(true) {
+                temperature= capteurs_temp.getTemperature();
+                std::this_thread::sleep_for(std::chrono::seconds(2));
+           }
+   } );
+*/
+
+   std::thread moteurs_thread( [&moteurs, &server, &server_mtx]()
+   {
+        moteurs.controle_moteurs(server, server_mtx);
+   } );
+
 
         if(server_thread.joinable())
         {
             server_thread.join();
+        }
+        if(client_thread.joinable())
+        {
+            client_thread.join();
+        }
+        if(capteurs_sonic_thread.joinable())
+        {
+            capteurs_sonic_thread.join();
+        }
+        if(moteurs_thread.joinable())
+        {
+            moteurs_thread.join();
         }
 
     return 0;
