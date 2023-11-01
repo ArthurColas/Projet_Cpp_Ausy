@@ -60,6 +60,9 @@ void JsonDataManager::ParseJson(string rawJson)
     Json::Reader reader;
     reader.parse(rawJson, root);
 
+    //cout << root["vitesse"] << endl;
+    //cout << root["direction"] << endl;
+
     _vitesse = root["vitesse"].asInt();
     _direction = root["direction"].asString();
 }

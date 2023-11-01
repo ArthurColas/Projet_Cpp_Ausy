@@ -20,7 +20,7 @@ main_client.exe: main_client.o client.o JsonDataManager.o moteurs.o
 main_server.exe: main_server.o server.o JsonDataManager.o moteurs.o
 	$(CC) -o $@ $^ $(CFLAGS) $(LIB)
 
-main_post_ihm.exe: main_post_ihm.o post_ihm.o
+main_post_ihm.exe: main_post_ihm.o post_ihm.o capteur_sonic.o
 	$(CC) -o $@ $^ $(CFLAGS) $(LIB)
 
 #$(MAIN_OBJ): $(MAIN_SRC)

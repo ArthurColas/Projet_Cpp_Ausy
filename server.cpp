@@ -3,6 +3,8 @@
 
 TCPServer::TCPServer(int port) {
     this->port = port;
+    this->vitesse=0;
+    this->direction="";
 
     serverSocket = socket(AF_INET, SOCK_STREAM, 0);
     if (serverSocket == -1) {
@@ -12,7 +14,14 @@ TCPServer::TCPServer(int port) {
 
     struct sockaddr_in serverAddress;
     serverAddress.sin_family = AF_INET;
-    serverAddress.sin_addr.s_addr = INADDR_ANY;
+//    serverAddress.sin_addr.s_addr = INADDR_ANY;
+// Specify the server's IP address here
+    const char* serverIP = "192.168.1.45";
+    if (inet_pton(AF_INET, serverIP, &(serverAddress.sin_addr)) <= 0) {
+        perror("Invalid server IP address");
+    exit(EXIT_FAILURE);
+    }
+
     serverAddress.sin_port = htons(port);
 
     if (bind(serverSocket, (struct sockaddr*)&serverAddress, sizeof(serverAddress)) < 0) {
@@ -40,7 +49,6 @@ void TCPServer::StartListening() {
     clientSocket = accept(serverSocket, (struct sockaddr*)&clientAddress, &clientAddressLength);
 
     while (true) {
-        
         if (clientSocket < 0) {
             perror("Accepting client connection failed");
             exit(EXIT_FAILURE);
@@ -58,11 +66,13 @@ void TCPServer::StartListening() {
 
         // You can process the received data here and send a response if needed.
         JsonDataManager data_received = JsonDataManager(buffer);
+	std::cout << "serverdebug direction : " << data_received.GetDirection() << std::endl;
+        std::cout << "server debug vitesse : " << data_received.GetVitesse() << std::endl;
         setDirection( data_received.GetDirection() );
         setVitesse( data_received.GetVitesse() );
         std::this_thread::sleep_for(std::chrono::milliseconds(500));
-    }
-    close(clientSocket);
+	}
+	close(clientSocket);
 }
 
 void TCPServer::Close() {

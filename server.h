@@ -9,6 +9,7 @@
 #include <unistd.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <arpa/inet.h> // Include the header for inet_pton
 
 #include "JsonDataManager.h"
 

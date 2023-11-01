@@ -20,6 +20,7 @@ Moteurs::Moteurs(int avD , int arD, int arG, int avG, int eep) {
     pinArriereG=arG;
     pinAvantG=avG;
     pinEEP=eep;
+    std::cout << "Moteurs initialises" << std::endl;
     init_gpio_moteurs();
 
 }
