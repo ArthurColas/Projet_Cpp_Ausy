@@ -15,7 +15,7 @@ post_ihm::post_ihm() {
 
 }
 
-void post_ihm::send(int temperature, int pression, int batterie, int gauche, int droite, int avant) {
+void post_ihm::send(double temperature, double pression, int batterie, double gauche, double droite, double avant) {
 
     CURL* curl;
     CURLcode res;

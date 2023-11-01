@@ -5,7 +5,7 @@ class post_ihm {
 public:
 
     post_ihm();
-    void send(int temperature, int pression, int batterie, int gauche, int droite, int avant);
+    void send(double temperature, double pression, int batterie, double gauche, double droite, double avant);
 
 private:
 };

@@ -1,17 +1,48 @@
 #include "post_ihm.h"
+#include "capteur_sonic.h"
+#include <thread>
+#include <chrono>
 
 int main() {
 
-	int temperature=10;
-        int pression=20;
+    while(true) {
+	capteur_sonic capteurs=capteur_sonic();
+	double gauche=capteurs.MeasureDist(16);
+        double droite=capteurs.MeasureDist(21);
+        double avant=capteurs.MeasureDist(20);
+
+	double temperature=10;
+        double pression=20;
         int batterie=30;
-        int gauche=40;
-        int droite=50;
-        int avant=60;
 
 	post_ihm client=post_ihm();
 	client.send(temperature, pression, batterie, gauche, droite, avant);
 
-	return 0;
+	std::this_thread::sleep_for(std::chrono::seconds(2));
+   } return 0;
 }
 
+/*
+
+    while (true) {
+        // Get sensor data
+        temperature = getTemperature();
+        pression = getPression();
+        batterie = getBatteriePercent();
+        gauche = getDistanceGauche();
+        droite = getDistanceDroite();
+        avant = getDistanceAvant();
+
+        std::thread temp_thread([&temperature]() {
+            temperature = getTemperature();
+        });
+
+        if (temp_thread.joinable()) {
+            temp_thread.join();
+        }
+
+        // Sleep for 2 seconds
+        std::this_thread::sleep_for(std::chrono::seconds(2));
+    }
+
+*/
