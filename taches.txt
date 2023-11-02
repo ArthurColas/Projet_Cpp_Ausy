@@ -1,8 +1,0 @@
-- implémenter le client/serveur TCP
-- implémenter la gestion du JSON pour le serveur TCP
-
-- analyser et comprendre pour le déplacement et la gestion des moteurs
-- lister les actions à faire du rover
-- implémenter des actions (ex: avancer d'une distance ou durée,  tourner d'un angle)
-
-- faire un makefile du projet
