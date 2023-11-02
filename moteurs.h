@@ -2,9 +2,6 @@
 #define MOTEUR_H
 
 #include <mutex>
-#include <thread>
-#include <chrono>
-#include "server.h"
 
 class Moteurs {
 public:
@@ -19,16 +16,16 @@ public:
     // Member functions
     void init_gpio_moteurs();
     void stop_motors();
+    void shut_down_motors();
     void marche_avant();
     void marche_arriere();
     void aller_gauche();
     void aller_droite();
-    void rotation();
+    void rotation_avant(int vitG, int vitD);
 
     int GetVitesse() { return vitesse;}
-    void SetVitesse(int vit) {vitesse=vit;}
-
-    void controle_moteurs(TCPServer &server, std::mutex &server_mtx); 
+    void SetVitesse(int vit);
+    void controle_moteurs(TCPServer &server, std::mutex &server_mtx);
 
 private:
     // Private data members (class attributes)
@@ -43,3 +40,4 @@ private:
 };
 
 #endif
+

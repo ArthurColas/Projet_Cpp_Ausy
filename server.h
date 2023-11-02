@@ -24,7 +24,7 @@ public:
     void setVitesse(int vit) {vitesse = vit;}
     int getVitesse() {return vitesse;}
 
-    void StartListening( std::mutex &server_mtx);
+    void StartListening(std::mutex &server_mtx);
     void Close();
 
 private:
@@ -35,4 +35,3 @@ private:
 };
 
 #endif
-
